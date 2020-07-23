@@ -57,13 +57,22 @@ class LinkedList:
             self.tail.set_next(new_node)
         self.tail = new_node
         self.length += 1 
+    
+    def contains(self):
+        # iterate throught all elements
+        cur_node = self.head
+        cur_max = self.head.get_value()
+        while cur_node is not None:
+            if cur_node.get_value() > cur_max:
+                cur_max = cur_node.get_value()
+            cur_node = cur_node.get_next()
 
     def remove_head(self):
         #empty linked list
         if self.head is None:
             return None
 
-        # list with 1 note
+        # list with 1 node
         elif self.head == self.tail:
             value = self.head.get_value()
             self.head = None
@@ -78,7 +87,33 @@ class LinkedList:
             return value 
 
     def remove_tail(self):
+        #empty linked list
         if self.tail is None:
             return None
+        
+        #list with 1 Node
+        elif self.tail == self.head:
+            value = self.tail.get_value()
+            self.tail = None
+            self.head = None
+            self.length -=1 
+            return value 
+        # list with 2 or more nodes. 
         else: 
-            self.tail
+            value = self.tail.get_value()
+            self.tail = self.tail.get_next()
+            self.length -= 1
+            return value 
+
+    def get_max(self):
+        if self.head is None:
+            return None
+        cur_node = self.head
+        cur_max = self.head.get_value()
+        while cur_node is not None:
+            if cur_node.get_value() > cur_max:
+                cur_max = cur_node.get_value()
+            cur_node = cur_node.get_next()
+        
+        return cur_max
+
