@@ -110,7 +110,7 @@ class LinkedList:
             current = current.get_next()
         
         value = self.tail.get_value()
-        self.tail = current
+        self.tail = current.set_next(None)
         return value 
 
     def get_max(self):
@@ -124,4 +124,3 @@ class LinkedList:
             cur_node = cur_node.get_next()
         
         return cur_max
-
