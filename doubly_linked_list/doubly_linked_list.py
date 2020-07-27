@@ -53,7 +53,7 @@ class DoublyLinkedList:
 
         if self.head is None and self.tail is None:
             self.head = new_node
-            self.head = new_node 
+            self.tail = new_node 
         else:
             self.head.prev = new_node
             self.head = new_node
@@ -72,7 +72,7 @@ class DoublyLinkedList:
                 self.head.prev = None
             else: 
                 self.tail = None
-            return old_head
+            return old_head.value
         else:
             print(' Cannot remove a node because the list is already empty.')
 
