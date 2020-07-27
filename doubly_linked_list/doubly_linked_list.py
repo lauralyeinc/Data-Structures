@@ -4,9 +4,32 @@ as well as its next node in the List.
 """
 class ListNode:
     def __init__(self, value, prev=None, next=None):
-        self.prev = prev
         self.value = value
+        self.prev = prev
         self.next = next
+    """Wrap the given value in a ListNode and insert it
+    after this node. Note that this node could already
+    have a next node it is point to."""
+    def insert_after(self, value):
+        current_next = self.next
+        self.next = ListNode(value, self, current_next)
+        if current_next:
+            current_next.prev = self.next
+    """Wrap the given value in a ListNode and insert it
+    before this node. Note that this node could already
+    have a previous node it is point to."""
+    def insert_before(self, value):
+        current_prev = self.prev
+        self.prev = ListNode(value, current_prev, self)
+        if current_prev:
+            current_prev.next = self.prev
+    """Rearranges this ListNode's previous and next pointers
+    accordingly, effectively deleting this ListNode."""
+    def delete(self):
+        if self.prev:
+            self.prev.next = self.next
+        if self.next:
+            self.next.prev = self.prev
 
 """
 Our doubly-linked list class. It holds references to 
@@ -41,17 +64,37 @@ class DoublyLinkedList:
     Returns the value of the removed Node.
     """
     def remove_from_head(self):
-        value = self.head.value
-
-        if self.head is None:
-            return None
-        if self.head is self.tail:
-            self.head = None
-            self.tail = None
+        if self.length > 0:
+            old_head = self.head
+            self.head = self.head.next
+            self.length -= 1 
+            if self.length == 1:
+                self.head.prev = None
+            else: 
+                self.tail = None
+            return old_head
         else:
-            self.delete(self.head)
-        self.length -= 1 
-        return value
+            print(' Cannot remove a node because the list is already empty.')
+
+        # if self.head:
+        #     current = self.head
+        #     if self.head is self.tail:
+        #         self.tail = None
+        #     self.head = current.next
+        #     self.length -= 1
+        #     return current.value 
+
+
+        # old_head = self.head
+        # new_head = old_head.next
+
+        # if new_head:
+        #     new_head.prev = None
+        #     self.head = new_head
+        # else:
+        #     self.head, self.tail = None, None
+        #     self.length -= 1
+        #     return old_head.value 
     """
     Wraps the given value in a ListNode and inserts it 
     as the new tail of the list. Don't forget to handle 
