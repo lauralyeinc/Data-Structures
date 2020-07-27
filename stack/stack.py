@@ -28,10 +28,11 @@ class Stack:
         # self.storage.append(value)
 
     def pop(self):
-        if(self.size == 0):
-            return
-        self.size -= 1
-        return self.storage.remove_tail()
+        if self.size > 0:
+            self.size -= 1
+            return self.storage.remove_tail()
+        else: 
+            return None 
 
         # if len(self.storage) != 0:
         #     return self.storage.pop(-1)

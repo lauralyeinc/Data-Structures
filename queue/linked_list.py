@@ -93,11 +93,11 @@ class LinkedList:
 
     def remove_tail(self):
         #empty linked list
-        if self.tail is None:
-            return None
+        if self.head is None and self.tail is None:
+            return 
         
         #list with 1 Node
-        elif self.head == self.tail:
+        if self.head is self.tail:
             value = self.head.get_value()
             self.tail = None
             self.head = None
@@ -111,6 +111,7 @@ class LinkedList:
         
         value = self.tail.get_value()
         self.tail = current
+        self.tail.next = None
         return value 
 
     def get_max(self):
@@ -124,3 +125,12 @@ class LinkedList:
             cur_node = cur_node.get_next()
         
         return cur_max
+
+    def print_list(self):
+        l = []
+        current = self.head
+        while current:
+            l.append(current.value)
+            current = current.get_next()
+        return l
+
