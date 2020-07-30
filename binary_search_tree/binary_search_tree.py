@@ -1,3 +1,8 @@
+from queue import Queue
+from stack import Stack
+from linked_list import LinkedList
+from linked_list import Node 
+
 """
 Binary search trees are a data structure that enforce an ordering over 
 the data they store. That ordering in turn makes it a lot more efficient 
@@ -106,20 +111,67 @@ class BSTNode:
 
     # Part 2 -----------------------
 
-    # Print all the values in order from low to high
-    # Hint:  Use a recursive, depth first traversal
-    # def in_order_print(self):
-    #     pass
+    #Print all the values in order from low to high
+    #Hint:  Use a recursive, depth first traversal
+    def in_order_print(self, node):
+        if node.left:
+            self.in_order_print(node.left)
 
-    # Print the value of every node, starting with the given node,
-    # in an iterative breadth first traversal
-    # def bft_print(self):
-    #     pass
+        print(node.value)
 
-    # Print the value of every node, starting with the given node,
-    # in an iterative depth first traversal
-    # def dft_print(self):
-    #     pass
+        if node.right:
+            self.in_order_print(node.right)
+
+        #pass
+
+    #Print the value of every node, starting with the given node,
+    #in an iterative breadth first traversal
+    def bft_print(self, node):
+        queue = Queue()
+        queue.enqueue(node)
+
+        while queue.size > 0:
+            current_node = queue.dequeue()
+            print(current_node.value)
+
+            if current_node.left:
+                queue.enqueue(current_node.left)
+            if current_node.right:
+                queue.enqueue(current_node.right)
+        # use a queue! 
+        # print current node
+    # add left_child to queue, add right_child to queue ( if not None )
+        # done when queue is empty
+
+        #pass
+
+        #resources about queues. https://www.tutorialspoint.com/python_data_structure/python_queue.htm
+
+    #Print the value of every node, starting with the given node,
+    #in an iterative depth first traversal
+    def dft_print(self, node):
+        stack = Stack()
+        stack.push(node)
+
+        while len(stack) > 0:
+            current_node = stack.pop()
+            print(current_node.value)
+
+            if current_node.right:
+                stack.push(current_node.right)
+            if current_node.left:
+                stack.push(current_node.left)
+
+        #create a stack 
+        #push some inital value(s)/ onto stack 
+        #while stack is not empty
+            # pop? print? push?
+        #done when stack is empty
+        
+        #pass
+
+
+
 
     # Stretch Goals -------------------------
     # Note: Research may be required
@@ -145,8 +197,8 @@ class BSTNode:
 # bst.insert(4)
 # bst.insert(2)
 
-# bst.bft_print()
-# bst.dft_print()
+# bst.bft_print(node)
+# bst.dft_print(node)
 
 # print("elegant methods")
 # print("pre order")
